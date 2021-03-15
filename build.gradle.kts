@@ -18,6 +18,7 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
+	/*implementation("org.springframework.security:spring-security-config")*/
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.github.microutils:kotlin-logging:2.0.3")
 	implementation("org.slf4j:slf4j-api:1.7.29")
