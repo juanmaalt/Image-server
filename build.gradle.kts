@@ -18,7 +18,8 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
-	/*implementation("org.springframework.security:spring-security-config")*/
+	implementation("org.springframework.boot:spring-boot-starter-security")
+/*	implementation("org.springframework.security:spring-security-config")*/
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.github.microutils:kotlin-logging:2.0.3")
 	implementation("org.slf4j:slf4j-api:1.7.29")
@@ -27,6 +28,7 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk:1.10.6")
 	implementation("com.amazonaws:aws-java-sdk-s3:1.11.969")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.withType<KotlinCompile> {
