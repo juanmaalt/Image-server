@@ -20,6 +20,8 @@ class CustomWebSecurityAdapter : WebSecurityConfigurerAdapter() {
             ?.csrf()?.disable()
             ?.headers()?.disable()
             ?.httpBasic()
+            ?.and()
+            ?.cors()
         http?.addFilterAfter(APIKeyFilter(), BasicAuthenticationFilter::class.java)
     }
 }
