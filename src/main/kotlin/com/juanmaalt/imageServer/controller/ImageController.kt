@@ -8,13 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/images")
@@ -38,5 +32,14 @@ class ImageController {
     fun saveImages(@ModelAttribute imageRequestBody: ImageRequestBody): ResponseEntity<ImageResponseBody> {
         logger.info { """POST request received for folder: ${imageRequestBody.path}""" }
         return ResponseEntity(imageService.saveImagesOnServer(imageRequestBody), HttpStatus.CREATED)
+    }
+
+    @DeleteMapping("/{imageName}", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun deleteImage(@PathVariable(name = "imageName") name: String, @RequestParam(required = false) folder: String?): ResponseEntity<String> {
+        var imagePath = folder?.let { folder.plus("/") } ?: run { "" }
+        imagePath = imagePath.plus("$name")
+        logger.info { """DELETE request received for $imagePath""" }
+
+        return ResponseEntity(imageService.deleteImageWithName(imagePath), HttpStatus.OK)
     }
 }

@@ -48,6 +48,20 @@ class ImageS3ServiceImpl : ImageService {
         }
     }
 
+    @Throws(ResourceNotFoundException::class)
+    override fun deleteImageWithName(name: String): String {
+        logger.info { """deteleImageWithName received a request for $name""" }
+        try {
+            amazonS3Client.deleteObject(bucketName, name)
+            logger.info { """The '$name' file exists, deleting...""" }
+
+            return "The image was successfully deleted"
+        }catch (ex: Exception){
+            logger.error { """Error trying to retrieve the $name image from AWS bucket""" }
+            throw ResourceNotFoundException(ex.message.toString())
+        }
+    }
+
     @Throws(InternalServerErrorException::class)
     override fun saveImagesOnServer(imageRequestBody: ImageRequestBody): ImageResponseBody {
         logger.info { """saveImagesOnServer received ${imageRequestBody.images.size} files to persist""" }

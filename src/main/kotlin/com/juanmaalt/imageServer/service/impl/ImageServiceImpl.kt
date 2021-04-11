@@ -36,6 +36,22 @@ class ImageServiceImpl : ImageService {
         return file.readBytes()
     }
 
+    @Throws(ResourceNotFoundException::class)
+    override fun deleteImageWithName(name: String): String {
+        logger.info { """deteleImageWithName received a request for $name""" }
+        val file = File("""$imagePath$name""")
+
+        if (!file.exists()) {
+            logger.error { """There is no match for $name""" }
+            throw ResourceNotFoundException("The requested file does not exists")
+        }
+
+        logger.info { """The '$name' file exists, deleting...""" }
+        file.delete()
+
+        return "The image was successfully deleted"
+    }
+
     @Throws(InternalServerErrorException::class)
     override fun saveImagesOnServer(imageRequestBody: ImageRequestBody): ImageResponseBody {
         logger.info { """saveImagesOnServer received ${imageRequestBody.images.size} files to persist""" }
