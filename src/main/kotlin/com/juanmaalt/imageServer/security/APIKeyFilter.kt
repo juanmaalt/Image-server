@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse
 @Component
 class APIKeyFilter : GenericFilterBean() {
 
-    @Value("\${application.super.code}")
+    @Value("\${application.apikey.code}")
     private val apikey: String = "b4b6357e-f5e4-45ec-807b-cf722a710925"
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {

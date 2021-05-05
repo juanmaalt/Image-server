@@ -29,6 +29,7 @@ dependencies {
 	implementation("com.amazonaws:aws-java-sdk-s3:1.11.969")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+    implementation(kotlin("script-runtime"))
 }
 
 tasks.withType<KotlinCompile> {
