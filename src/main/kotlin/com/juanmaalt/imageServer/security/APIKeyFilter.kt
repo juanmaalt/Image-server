@@ -1,9 +1,5 @@
 package com.juanmaalt.imageServer.security
 
-import mu.KotlinLogging
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.http.HttpMethod
-import org.springframework.stereotype.Component
 import org.springframework.web.filter.GenericFilterBean
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
@@ -11,11 +7,9 @@ import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-@Component
-class APIKeyFilter : GenericFilterBean() {
+class APIKeyFilter(private val key: String) : GenericFilterBean() {
 
-    @Value("\${application.apikey.code}")
-    private val apikey: String = "b4b6357e-f5e4-45ec-807b-cf722a710925"
+    private val apikey = key
 
     override fun doFilter(request: ServletRequest?, response: ServletResponse?, chain: FilterChain?) {
         val castedRequest = request as HttpServletRequest
